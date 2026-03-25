@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 import subprocess
 import os
-
-STATE_FILE = os.path.expanduser("~/.login_monitor.state")
-message_sender_script_path = os.path.expanduser("~/send_telegram.py")
+import sys
+ 
+STATE_FILE = "/home/anton/Desktop/SysAdNstu/.login_monitor.state"
+message_sender_script_path = "/home/anton/Desktop/SysAdNstu/send_telegram.py"
 result = subprocess.run(["last", "-w", "-n", "20"], capture_output=True, text=True)
 lines = result.stdout.strip().split("\n")
 
@@ -41,7 +42,7 @@ for line in reversed(new_lines):
     formatted = " ".join(tail)
 
 
-    os.system(f"/usr/bin/env python3 {message_sender_script_path} {login} '{formatted}'")
+    os.system(f"/usr/bin/python3 {message_sender_script_path} {login} '{formatted}'")
 
 with open(STATE_FILE, "w") as f:
     f.write(lines[0] + "\n")

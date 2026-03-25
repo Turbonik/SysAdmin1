@@ -2,10 +2,12 @@
 import requests
 import sys
 
-print('Send starting')
+ENV_PATH = "/home/anton/Desktop/SysAdNstu/.env"
+with open(ENV_PATH) as f:
+    lines = f.read().splitlines()
 
-TOKEN = "8784963710:AAHfZAxRTNSqB12wZ2ypNW7dlXZJ7MdV6OM"
-CHAT_ID = "5741136303"
+TOKEN = lines[0].split("=")[1].strip()
+CHAT_ID = lines[1].split("=")[1].strip()
 
 login = sys.argv[1]
 datetime = sys.argv[2]
